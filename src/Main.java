@@ -15,7 +15,8 @@ public class Main {
             System.out.println("2. Consulta de los diferentes tipos de examen");
             System.out.println("3. Consulta de los tribunales");
             System.out.println("4. Eliminar opositor");
-            System.out.println("5. Salir");
+            System.out.println("5. Consultar opositores por ciudad");
+            System.out.println("6. Salir");
             opc = sn.nextInt();
             switch (opc){
                 case 1:
@@ -31,12 +32,15 @@ public class Main {
                     opoController.eliminarOpo();
                     break;
                 case 5:
+                    opoController.consultaOpoCiudad();
+                    break;
+                case 6:
                     System.out.println("Salir");
                     break;
                     default:
                         break;
             }
-        }while (opc != 5);
+        }while (opc != 6);
         sn.close();
         sc.close();
     }

@@ -3,9 +3,12 @@ import java.util.ArrayList;
 
 public class BDController {
     private Connection conexion;
+    private PreparedStatement cPrepOpoCiudad;
+
     BDController(){
         try {
             this.conexion = DriverManager.getConnection("jdbc:mysql://192.168.10.252:3306/oposiciones","1GS","Nelson2000");
+            this.cPrepOpoCiudad = conexion.prepareStatement("SELECT * FROM opositores WHERE CIUOPO=?");
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -76,6 +79,21 @@ public class BDController {
             e.printStackTrace();
         }
         return tribunales;
+    }
+
+    public ArrayList<Opositor> datosOpoCiudad(String ciuopo){
+        ArrayList<Opositor> opositores = new ArrayList<>();
+        try {
+            cPrepOpoCiudad.setString(1, ciuopo);
+            ResultSet rs = cPrepOpoCiudad.executeQuery();
+            while (rs.next()){
+                opositores.add(new Opositor(rs.getString("DNIOPO"), rs.getString("NOMOPO"),rs.getString("CIUOPO"), rs.getString("TFALU")));
+            }
+            rs.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return opositores;
     }
 }
 

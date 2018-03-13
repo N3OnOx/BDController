@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class OpositorController {
     private BDController controladorBD;
 
@@ -28,5 +30,13 @@ public class OpositorController {
         return "OpositorController{" +
                 "controladorBD=" + controladorBD +
                 '}';
+    }
+
+    public void consultaOpoCiudad(){
+        Scanner sc = new Scanner(System.in);
+        String ciuopo = sc.nextLine();
+        for (Opositor opo: this.controladorBD.datosOpoCiudad(ciuopo)){
+            System.out.println("Nombre: "+opo.getNombre()+" DNI: "+opo.getDni()+" Ciudad: "+opo.getCiudad()+" Telefono: "+opo.getTelefono());
+        }
     }
 }
